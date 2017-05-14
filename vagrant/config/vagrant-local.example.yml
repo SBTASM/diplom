@@ -1,0 +1,22 @@
+# Your personal GitHub token
+github_token: ec11770eff7e5a787eb9dba9d7f38fa60723f59a
+# Read more: https://github.com/blog/1509-personal-api-tokens
+# You can generate it here: https://github.com/settings/tokens
+
+# Guest OS timezone
+timezone: Europe/London
+
+# Are we need check box updates for every 'vagrant up'?
+box_check_update: false
+
+# Virtual machine name
+machine_name: diplom.dev
+
+# Virtual machine IP
+ip: 192.168.83.137
+
+# Virtual machine CPU cores number
+cpus: 1
+
+# Virtual machine RAM
+memory: 512
