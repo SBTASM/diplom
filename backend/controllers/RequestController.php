@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Distance;
 use common\models\Distances;
+use common\models\RequestForm;
 use Yii;
 use common\models\Request;
 use yii\base\Model;
@@ -76,7 +77,7 @@ class RequestController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Request();
+        $model = new RequestForm(['race' => 0]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

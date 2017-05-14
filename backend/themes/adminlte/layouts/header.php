@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">' . mb_substr(Yii::t('backend', 'Admin console'), 0, 1) . "\n" . '</span><span class="logo-lg">' . Yii::t('backend', 'Admin console') . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -27,20 +27,28 @@ use yii\helpers\Html;
 
                         <!-- Menu Footer-->
                         <li class="user-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="pull-left"><?= Html::a(
+                                            Yii::t('backend', 'Sign out'),
+                                            ['/site/logout'],
+                                            ['data-method' => 'post', 'class' => 'btn btn-primary btn-flat']
+                                        ) ?>
+                                    </div>
+                                    <div class="pull-right">
+                                        <?= Html::a(
+                                            Yii::t('backend', 'Change password'),
+                                            ['user/change-password'],
+                                            ['class' => 'btn btn-danger btn-flat']
+                                        ) ?>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="text-center">
-                                <?= Html::a(
-                                    'Sign out',
-                                    ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
-                                ) ?>
+
                             </div>
                         </li>
                     </ul>
-                </li>
-
-                <!-- User Account: style can be found in dropdown.less -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>
             </ul>
         </div>

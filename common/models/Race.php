@@ -56,7 +56,7 @@ class Race extends \yii\db\ActiveRecord
         return [
             'id' => \Yii::t('frontend', 'Full name'),
             'city' => \Yii::t('frontend', 'City'),
-            'club_name' => \Yii::t('frontend', 'City'),
+            'club_name' => \Yii::t('frontend', 'Club name'),
             'age_group_race' => \Yii::t('frontend', 'Age group'),
             'name_1' => \Yii::t('frontend', 'Full name'),
             'name_2' => \Yii::t('frontend', 'Full name'),

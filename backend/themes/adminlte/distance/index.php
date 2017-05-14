@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id',
                             'distance',
 
-                            ['class' => \kartik\grid\ActionColumn::className()],
+                            ['class' => \kartik\grid\ActionColumn::className(), 'header' => Yii::t('backend', 'Actions')],
                         ],
                     ]); ?>
                 </div>

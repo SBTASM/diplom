@@ -8,8 +8,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Request */
 
-$this->title = 'Создать заявку';
-$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
+$this->title = Yii::t('backend', 'Create request');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Requests'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -3,6 +3,12 @@
 namespace  common\models;
 
 class RaceForm extends Race{
+
+    public function scenarios()
+    {
+        return array_merge(parent::scenarios(), []);
+    }
+
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [

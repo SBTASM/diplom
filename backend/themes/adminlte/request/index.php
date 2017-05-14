@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Заявки';
+$this->title = Yii::t('backend', 'Requests');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="request-index">
@@ -21,14 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($data){
                     return $data->first_name . ' ' . $data->last_name . ' ' . $data->pat_name;
                 },
-                'label' => 'Имя'
+                'label' => Yii::t('backend', 'Requests')
 
             ],
             'date_of_birth',
             [
                 'attribute' => 'sex',
                 'content' => function($data){
-                    return $data->sex ? 'Женский' : 'Мужской';
+                    return $data->sex ? Yii::t('backend', 'Woman') : Yii::t('backend', 'Man');
                 }
             ],
 			'city',
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'phone_number',
 
             [
-                'label' => 'Дистанции',
+                'label' => Yii::t('backend', 'Distances'),
                 'format' => 'text',
                 'value' => function ($model) {
                     return $model->getDistances()->count();
@@ -46,10 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'race',
                 'format' => 'boolean',
-                'label' => 'Участвие в естафете'
+                'label' => Yii::t('backend', 'Participation in the relay race')
             ],
 
-            ['class' => \kartik\grid\ActionColumn::className()],
+            [
+                'header' => Yii::t('backend', 'Actions'),
+                'class' => \kartik\grid\ActionColumn::className(),
+            ],
         ],
         'toolbar' => [
             '{export}',

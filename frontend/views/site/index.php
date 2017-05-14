@@ -32,7 +32,6 @@ $this->title = 'Форма регистрации';
                                 'startDate' => '01.01.1890',
                             ]
                         ]) ?></div>
-                    <!---->
                 </div>
             </div>
             <div class="row">

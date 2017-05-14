@@ -14,6 +14,8 @@
                     ['label' => Yii::t('backend' , 'Distances'), 'icon' => 'bicycle', 'url' => ['/distance']],
                     ['label' => Yii::t('backend' , 'Race'), 'icon' => 'fighter-jet', 'url' => ['/race']],
                     ['label' => Yii::t('backend' , 'Relays'), 'icon' => 'sort-alpha-asc', 'url' => ['/stucking']],
+                    ['label' => Yii::t('backend' , 'Users'), 'icon' => 'users', 'url' => ['/stucking']],
+                    ['label' => Yii::t('backend' , 'Settings'), 'icon' => 'gears', 'url' => ['/settings']],
                 ],
             ]
         ) ?>

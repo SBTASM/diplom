@@ -53,14 +53,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
-
+        'keyStorage' => [
+            'class' => \common\components\keyStorage\KeyStorage::class,
+        ],
     ],
+    'name' => Yii::t('backend', 'Admin console'),
     'params' => $params,
 ];

@@ -2,7 +2,7 @@
 
 return [
     'Home' => 'Головна',
-    'Admin console' => 'Фдміністративна консоль',
+    'Admin console' => 'Консоль',
     'Requests' => 'Заявки',
     'Age groups' => 'Вікові категорії',
     'Distances' => 'Дистанції',
@@ -17,5 +17,28 @@ return [
     'Create distance' => 'Створити дистанцію',
     'Update distance' => 'Редагувати дистанцію',
     'Delete' => 'Видалити',
-    'View' => 'Перегляд'
+    'View' => 'Перегляд',
+    'Users' => 'Користувачі',
+    'Relays' => 'Запливи',
+    'Sign out' => 'Вийти',
+    'Create request' => 'Створити заявку',
+    'Request' => 'Заявка',
+    'Man' => 'Чоловіча',
+    'Woman' => 'Жіноча',
+    'Actions' => 'Дії',
+    'Sex' => 'Стать',
+    'Are you sure you want to delete this item?' => 'Ви насправді бажаете видалити цей запис?',
+    'Create new distance' => 'Створити нову дистанцію',
+    'Age group' => 'Вікова категорія',
+    'Distances not found.' => 'Дистаній немає',
+    'No' => 'Ні',
+    'Create new relay' => 'Додати естафету',
+    'ID' => 'Унікальний ідентифікатор',
+    'Participation in the relay race' => 'Участь в естафеті',
+    'Save' => 'Зберегти',
+    'Add relays' => 'Додати естафету',
+    'Create race' => 'Додати естафету',
+    'Races' => 'Естафети',
+    'Change password' => 'Змінити пароль',
+    'Settings' => 'Налаштування'
 ];
