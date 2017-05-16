@@ -76,7 +76,9 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-sm-12">
         <div class="text-center">
+
             <?= Html::submitButton(Yii::t('backend', 'Save'), ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 </div>
+<?php ActiveForm::end() ?>

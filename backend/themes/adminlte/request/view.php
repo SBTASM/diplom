@@ -89,9 +89,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a(Yii::t('backend', 'Create new distance'), ['new-distance', 'id' => $model->id], [
                     'class' => 'btn btn-success',
                 ]) ?>
-                <?= Html::a(Yii::t('backend', 'Add relays'), ['race/create'], [
-                    'class' => 'btn btn-default',
-                ]) ?>
+
+                <?php if(is_null($model->getRace()->one())){ ?>
+                    <?= Html::a(Yii::t('backend', 'Add relays'), ['race/create', 'owner_id' => $model->id], [
+                        'class' => 'btn btn-default',
+                    ]) ?>
+                <?php }else{ ?>
+                    <?= Html::a(Yii::t('backend', 'Edit relays'), ['race/update', 'owner_id' => $model->id], [
+                        'class' => 'btn btn-default',
+                    ]) ?>
+                <?php } ?>
             </div>
         </div>
     </div>

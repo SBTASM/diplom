@@ -18,7 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'city',
             'club_name',
-            'age_group',
+            [
+                'label' => Yii::t('backend', 'Age group'),
+                'attribute' => 'age_group_race',
+                'value' => function($model){
+                    return $model->getAgeGroupRace()->one()->group;
+                }
+            ],
             'name_1',
             'name_2',
             'name_3',

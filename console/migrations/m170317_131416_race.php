@@ -27,8 +27,6 @@ class m170317_131416_race extends Migration
             'date_of_birth_4' => $this->string()->notNull(),
 
             'owner_id' => $this->integer()->notNull(),
-
-            'age_grou_race' => $this->integer()->notNull()
         ], $tableOptions);
         
         $this->createIndex('idx-race-owner_id', 'race', 'owner_id');

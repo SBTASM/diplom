@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 
+use common\models\Distances;
 use common\models\DistancesForm;
 use common\models\RaceForm;
 use common\models\Request;
@@ -162,5 +163,17 @@ class SiteController extends Controller
 
     public function actionTest(){
         echo \Yii::t('yii', 'Powered by {yii}', ['yii' => 'yii2']); die();
+    }
+    
+    public function actionViewRequest(){
+
+        $id = 1;
+
+        $request = Request::find()->where(['id' => $id])->one();
+        $distances = $request->distances;
+
+        var_dump($request);
+
+        var_dump($distances);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\RaceForm;
 use Yii;
 use common\models\Race;
 use yii\data\ActiveDataProvider;
@@ -71,13 +72,17 @@ class RaceController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($owner_id)
     {
-        $model = new Race();
+        $model = new Race(['owner_id' => $owner_id]);
 
         if ($model->load(Yii::$app->request->post())) {
             $owner = $model->getOwner()->one();
-            $owner->race = 1; $model->save();
+            $owner->race = 1;
+            if($model->save()){
+                $owner->save();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

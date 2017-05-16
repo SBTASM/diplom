@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "race".
@@ -24,7 +25,7 @@ use Yii;
  * @property AgeGroupRace $ageGroupRace
  * @property Request $owner
  */
-class Race extends \yii\db\ActiveRecord
+class Race extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -41,9 +42,9 @@ class Race extends \yii\db\ActiveRecord
     {
         return [
             [['city', 'club_name', 'age_group_race', 'name_1', 'name_2', 'name_3', 'name_4', 'date_of_birth_1', 'date_of_birth_2', 'date_of_birth_3', 'date_of_birth_4', 'owner_id'], 'required'],
-            [['age_group', 'owner_id'], 'integer'],
+            [['age_group_race', 'owner_id'], 'integer'],
             [['city', 'club_name', 'name_1', 'name_2', 'name_3', 'name_4', 'date_of_birth_1', 'date_of_birth_2', 'date_of_birth_3', 'date_of_birth_4'], 'string', 'max' => 255],
-            [['age_group_race'], 'exist', 'skipOnError' => true, 'targetClass' => AgeGroupRace::className(), 'targetAttribute' => ['age_group' => 'id']],
+            [['age_group_race'], 'exist', 'skipOnError' => true, 'targetClass' => AgeGroupRace::className(), 'targetAttribute' => ['age_group_race' => 'id']],
             [['owner_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::className(), 'targetAttribute' => ['owner_id' => 'id']],
         ];
     }
@@ -54,7 +55,7 @@ class Race extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => \Yii::t('frontend', 'Full name'),
+            'id' => \Yii::t('frontend', 'ID'),
             'city' => \Yii::t('frontend', 'City'),
             'club_name' => \Yii::t('frontend', 'Club name'),
             'age_group_race' => \Yii::t('frontend', 'Age group'),
@@ -73,9 +74,9 @@ class Race extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAgeGroup()
+    public function getAgeGroupRace()
     {
-        return $this->hasOne(AgeGroup::className(), ['id' => 'age_group']);
+        return $this->hasOne(AgeGroupRace::className(), ['id' => 'age_group_race']);
     }
 
     /**

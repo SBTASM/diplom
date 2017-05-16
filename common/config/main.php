@@ -29,7 +29,12 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
                     'fileMap' => ['yii' => 'yii.php' ]
-                ]
+                ],
+                'kvdate*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/messages',
+                    'fileMap' => ['kvdate' => 'kvdate.php' ]
+                ],
             ],
         ],
     ],

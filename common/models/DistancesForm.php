@@ -6,7 +6,8 @@ class DistancesForm extends Distances{
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-            'distance_id' => \Yii::t('frontend', 'Distance')
+            'distance_id' => \Yii::t('frontend', 'Distance'),
+
         ]);
     }
 }

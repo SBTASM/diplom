@@ -18,6 +18,9 @@ namespace common\models;
 
 class RequestForm extends Request
 {
+
+    const SCENARIO_EDIT = 'edit';
+
     public $distances_count_day1;
     public $distances_count_day2;
 
@@ -37,4 +40,22 @@ class RequestForm extends Request
             'distances_count_day2' => \Yii::t('frontend', 'Distance count of day 2'),
         ]);
     }
+
+
+    public function scenarios()
+    {
+        return array_merge(parent::scenarios(), [
+            self::SCENARIO_EDIT => [
+                'first_name',
+                'last_name',
+                'pat_name',
+                'email',
+                'date_of_birth',
+                'sex', 'age_group',
+                'club_name', 'city',
+                'phone_number'
+            ],
+        ]);
+    }
+
 }

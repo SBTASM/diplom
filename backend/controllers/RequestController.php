@@ -77,7 +77,7 @@ class RequestController extends Controller
      */
     public function actionCreate()
     {
-        $model = new RequestForm(['race' => 0]);
+        $model = new RequestForm(['race' => 0, 'scenario' => RequestForm::SCENARIO_EDIT]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -142,14 +142,14 @@ class RequestController extends Controller
     }
 
     public function actionNewDistance($id){
-        $model = new Distances();
+        $model = new Distances(['owner_id' => $id]);
 
         if($model->load(\Yii::$app->request->post())){
             $model->owner_id = $id;
 
 
             if($model->save())
-                return $this->redirect(['view', 'id' => $id]);
+                return $this->redirect(['view', 'id' => $model->id]);
             else
                 return $this->render('new-distance', ['model' => $model]);
         }
@@ -164,5 +164,11 @@ class RequestController extends Controller
         $model->delete();
 
         return $this->redirect(['update', 'id' => $owner_id]);
+    }
+
+    public function actionTest($id){
+        $request = Request::findOne([$id]);
+
+        var_dump($request->getRace()->one()); die();
     }
 }

@@ -2,7 +2,8 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Пока не готово)';
+$this->title = Yii::t('yii', 'Home');
+
 ?>
 <div class="site-index">
 

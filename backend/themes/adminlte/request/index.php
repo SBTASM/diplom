@@ -19,9 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'first_name',
                 'content' => function($data){
-                    return $data->first_name . ' ' . $data->last_name . ' ' . $data->pat_name;
+                    return $data->last_name . ' ' . $data->first_name . ' ' . $data->pat_name;
                 },
-                'label' => Yii::t('backend', 'Requests')
+                'label' => Yii::t('backend', 'Full name')
 
             ],
             'date_of_birth',
@@ -32,9 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 			'city',
-            // 'email:email',
              'phone_number',
-
             [
                 'label' => Yii::t('backend', 'Distances'),
                 'format' => 'text',

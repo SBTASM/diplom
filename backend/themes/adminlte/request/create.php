@@ -49,24 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-sm-12">
                     <div class="col-sm-3"> <?= $form->field($model, 'sex')->dropDownList([0 => 'Мужчина', 1 => 'Женщина']) ?></div>
                     <div class="col-sm-3"> <?= $form->field($model, 'age_group')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\AgeGroup::find()->all(), 'id', 'group'), []) ?></div>
-                    <div class="col-sm-3"> <?= $form->field($model, 'distances_count_day1', ['options' => ['id' => 'count_day1']])->textInput(['type' => 'number'])?></div>
-                    <div class="col-sm-3"> <?= $form->field($model, 'distances_count_day2', ['options' => ['id' => 'count_day2']])->textInput(['type' => 'number'])?></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="col-sm-3 col-sm-push-9">
-                        <?= $form->field($model, 'race')->widget(CheckboxX::classname(), [
-                            'autoLabel' => true,
-                            'name'=>'s_1',
-                            'options' => [
-                                'race' => 's_1',
-                            ],
-                            'pluginOptions' => [
-                                'threeState' => false
-                            ]
-                        ])->label(false); ?>
-                    </div>
                 </div>
             </div>
 		</div>
@@ -76,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="text-center">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <?= Html::submitButton('Далі', ['class' => 'btn btn-primary']) ?>
+                        <?= Html::submitButton(Yii::t('backend', 'Save'), ['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
             </div>
