@@ -14,8 +14,8 @@
                         ['label' => Yii::t('backend' , 'List'), 'icon' => 'list', 'url' => ['/request']],
                     ]],
                     ['label' => Yii::t('backend' , 'Age groups'), 'icon' => 'bars', 'items' => [
-                        ['label' => Yii::t('backend' , 'Age group from request'), 'icon' => 'rss', 'url' => ['/request/create']],
-                        ['label' => Yii::t('backend' , 'Age group from race'), 'icon' => 'fighter-jet', 'url' => ['/request/create']]
+                        ['label' => Yii::t('backend' , 'Age group from request'), 'icon' => 'rss', 'url' => ['agegroup/index']],
+                        ['label' => Yii::t('backend' , 'Age group from race'), 'icon' => 'fighter-jet', 'url' => ['agegroup-race/index']]
                     ]],
                     ['label' => Yii::t('backend' , 'Users'), 'icon' => 'users', 'url' => ['/stucking']],
                     ['label' => Yii::t('backend' , 'Settings'), 'icon' => 'gears', 'url' => ['/settings']],

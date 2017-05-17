@@ -147,7 +147,6 @@ class RequestController extends Controller
         if($model->load(\Yii::$app->request->post())){
             $model->owner_id = $id;
 
-
             if($model->save())
                 return $this->redirect(['view', 'id' => $model->id]);
             else

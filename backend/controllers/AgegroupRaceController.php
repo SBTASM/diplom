@@ -2,8 +2,9 @@
 
 namespace backend\controllers;
 
+use common\models\AgeGroupRace;
 use Yii;
-use common\models\Race;
+use common\models\AgeGroup;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -11,9 +12,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RaceController implements the CRUD actions for Race model.
+ * AgegroupController implements the CRUD actions for AgeGroup model.
  */
-class RaceController extends Controller
+class AgegroupRaceController extends Controller
 {
     /**
      * @inheritdoc
@@ -40,22 +41,21 @@ class RaceController extends Controller
     }
 
     /**
-     * Lists all Race models.
+     * Lists all AgeGroup models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Race::find(),
+            'query' => AgeGroupRace::find(),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
-
     /**
-     * Displays a single Race model.
+     * Displays a single AgeGroup model.
      * @param integer $id
      * @return mixed
      */
@@ -65,27 +65,16 @@ class RaceController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
     /**
-     * Creates a new Race model.
+     * Creates a new AgeGroup model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($owner_id)
+    public function actionCreate()
     {
-        $model = new Race(['owner_id' => $owner_id]);
+        $model = new AgeGroupRace();
 
-        if($model->getOwner()->one()->race === 1){
-            return $this->redirect(['race/update', 'id' => $model->getOwner()->one()->getRace()->id]);
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-            $owner = $model->getOwner()->one();
-            $owner->race = 1;
-            if($model->save()){
-                $owner->save();
-            }
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -93,9 +82,8 @@ class RaceController extends Controller
             ]);
         }
     }
-
     /**
-     * Updates an existing Race model.
+     * Updates an existing AgeGroup model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -112,36 +100,31 @@ class RaceController extends Controller
             ]);
         }
     }
-
     /**
-     * Deletes an existing Race model.
+     * Deletes an existing AgeGroup model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $owner = $model->getOwner()->one();
-
-        $model->delete(); $owner->race = 0; $owner->save();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
-
     /**
-     * Finds the Race model based on its primary key value.
+     * Finds the AgeGroup model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Race the loaded model
+     * @return AgeGroupRace the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Race::findOne($id)) !== null) {
+        if (($model = AgeGroupRace::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 }

@@ -102,9 +102,7 @@ class SiteController extends Controller
                 return $this->redirect(['site/race']);
             }else{
                 $this->saveModels($request_form, $models);
-                $this->render('result'); //??
-
-
+                return $this->render('result'); //??s
             }
         }
 
