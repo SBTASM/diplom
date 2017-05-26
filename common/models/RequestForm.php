@@ -24,12 +24,16 @@ class RequestForm extends Request
     public $distances_count_day1;
     public $distances_count_day2;
 
+    public $license;
+
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['distances_count_day1', 'distances_count_day2'], 'required'],
-            [['distances_count_day1', 'distances_count_day2'], 'integer'],
+            [['distances_count_day1', 'distances_count_day2', 'license'], 'required'],
+            [['distances_count_day1', 'distances_count_day2', 'license'], 'integer'],
             [['distances_count_day1', 'distances_count_day2'], 'number', 'min' => 1],
+            [['license'], 'compare', 'compareValue' => '1', 'operator' => '==', 'type' => 'number', 'message' =>
+            \Yii::t('frontend', 'You must agree to the license terms')]
         ]);
     }
 
@@ -38,6 +42,7 @@ class RequestForm extends Request
         return array_merge(parent::attributeLabels(), [
             'distances_count_day1' => \Yii::t('frontend', 'Distance count of day 1'),
             'distances_count_day2' => \Yii::t('frontend', 'Distance count of day 2'),
+            'license' => \Yii::t('frontend', 'license')
         ]);
     }
 

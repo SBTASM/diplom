@@ -101,7 +101,7 @@ class RequestController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && Model::loadMultiple($distances, \Yii::$app->request->post()) && $model->save()) {
             foreach ($distances as $distance){
-                $r = $distance->save(false);
+                $distance->save(false);
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -169,5 +169,45 @@ class RequestController extends Controller
         $request = Request::findOne([$id]);
 
         var_dump($request->getRace()->one()); die();
+    }
+
+    public function actionSendConfirmMessage($id){
+
+        $request = Request::find()->where(['id' => $id])->one();
+
+        $dates = [
+            '14 травня 2016р. (субота).' => [
+                '11:00 - 13:30 - реестрація учасників',
+                '14:00 - 14:45 - розминка',
+                '15:00 - старт',
+            ],
+            '15 травня 2016р. (неділя)' => [
+                '09:00 - 09:45 - розминка',
+                '10:00 - старт'
+            ]
+        ];
+        $numbers = [
+            'Максим' => '+380976436156',
+            'Ігор' => '+380975382086'
+        ];
+
+        $mail = \Yii::$app->mailer->compose('confirm', [
+            'dates' => $dates,
+            'numbers' => $numbers,
+            'address' => 'м. Полтава, вулиця Фрунзе 2, офіс 419',
+            'email' => \Yii::$app->params['supportEmail'],
+            'username' => $request->first_name
+        ]);
+
+        $mail->setSubject('Підтвердження реестрації на ВППО "МАСТЕРС" 14 та 15 травня 2016 року');
+        $mail->setTo($request->email);
+        $mail->setFrom(\Yii::$app->params['adminEmail']);
+
+        $mail->send();
+
+        if($request->send_email === 0) $request->send_email = true;
+        $request->save();
+
+        return $this->redirect(['request/view', 'id' => $id]);
     }
 }

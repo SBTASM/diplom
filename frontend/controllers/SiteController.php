@@ -2,12 +2,10 @@
 namespace frontend\controllers;
 
 
-use common\models\Distances;
 use common\models\DistancesForm;
 use common\models\RaceForm;
 use common\models\Request;
 use common\models\RequestForm;
-use common \models\Race;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -102,6 +100,10 @@ class SiteController extends Controller
                 return $this->redirect(['site/race']);
             }else{
                 $this->saveModels($request_form, $models);
+
+                //Mb error?
+                $this->sendConfirmMessage($request_form->first_name, $request_form->email, $request_form->id);
+
                 return $this->render('result'); //??s
             }
         }
@@ -124,23 +126,28 @@ class SiteController extends Controller
         if(\Yii::$app->request->getIsPost() && $model->load(\Yii::$app->request->post())){
 
             $this->saveModels($request_form, $distances_form, $model);
+
             return $this->render('result', []);
         }
 
 
         return $this->render('race', ['model' => $model]);
     }
+    public function actionTestMail(){
+        $this->sendConfirmMessage('Богдан', 'sirenko_bogdan@ukr.net');
+    }
     /**
      * @param RequestForm $request_form
      * @param DistancesForm[] $distances_form
      * @param RaceForm $race_form
      */
-    private function saveModels($request_form, $distances_form, $race_form = null){
+    private function saveModels(&$request_form, &$distances_form, &$race_form = null){
 
         \Yii::$app->session->remove('request_form');
         \Yii::$app->session->remove('distances_form');
 
         $request = new Request(ArrayHelper::toArray($request_form));
+        $request->send_email = true;
         $request->save();
         foreach ($distances_form as $distance){
             $distance->owner_id = $request->id;
@@ -153,25 +160,48 @@ class SiteController extends Controller
             $race->save();
         }
     }
-
-    public function actionTestMail(){
-        $name = "Bogdan";
-        echo \Yii::t('mail', 'Hello dear {username}!', ['username' => $name]); die();
-    }
-
-    public function actionTest(){
-        echo \Yii::t('yii', 'Powered by {yii}', ['yii' => 'yii2']); die();
-    }
-    
     public function actionViewRequest(){
 
         $id = 1;
-
         $request = Request::find()->where(['id' => $id])->one();
-        $distances = $request->distances;
 
-        var_dump($request);
+        return $this->render('view-request', ['request' => $request]);
+    }
+    private function sendConfirmMessage($username, $to, $request_id = null){
 
-        var_dump($distances);
+        $dates = [
+            '14 травня 2016р. (субота).' => [
+                '11:00 - 13:30 - реестрація учасників',
+                '14:00 - 14:45 - розминка',
+                '15:00 - старт',
+            ],
+            '15 травня 2016р. (неділя)' => [
+                '09:00 - 09:45 - розминка',
+                '10:00 - старт'
+            ]
+        ];
+        $numbers = [
+            'Максим' => '+380976436156',
+            'Ігор' => '+380975382086'
+        ];
+
+        $mail = \Yii::$app->mailer->compose('confirm', [
+            'dates' => $dates,
+            'numbers' => $numbers,
+            'address' => 'м. Полтава, вулиця Фрунзе 2, офіс 419',
+            'email' => \Yii::$app->params['supportEmail'],
+            'username' => $username
+        ]);
+
+        $mail->setSubject('Підтвердження реестрації на ВППО "МАСТЕРС" 14 та 15 травня 2016 року');
+        $mail->setTo($to);
+        $mail->setFrom(\Yii::$app->params['adminEmail']);
+
+        $mail->send();
+    }
+
+    public function actionTest(){
+
+        return $this->render('test');
     }
 }

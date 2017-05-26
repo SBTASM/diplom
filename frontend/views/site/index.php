@@ -4,6 +4,7 @@ use kartik\form\ActiveForm;
 use kartik\widgets\DepDrop;
 use yii\bootstrap\Html;
 use kartik\checkbox\CheckboxX;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model \common\models\Request */
@@ -61,18 +62,45 @@ $this->title = Yii::t('frontend', 'Registration form');
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="col-sm-3 col-sm-push-9">
-                            <?= $form->field($model, 'race')->widget(CheckboxX::classname(), [
-                                'autoLabel' => false,
-                                'name'=>'s_1',
-                                'options' => [
-                                    'race' => 's_1',
-                                ],
-                                'pluginOptions' => [
-                                    'threeState' => false
-                                ]
-                            ]) ?>
+                    <div class="text-center">
+                        <div class="col-sm-12">
+                            <div class="col-sm-4">
+                                <?= $form->field($model, 'race')->widget(CheckboxX::classname(), [
+                                    'autoLabel' => false,
+                                    'name'=>'s_1',
+                                    'options' => [
+                                        'race' => 's_1',
+                                    ],
+                                    'pluginOptions' => [
+                                        'threeState' => false
+                                    ]
+                                ]) ?>
+                            </div>
+                            <div class="col-sm-4">
+                                <?php
+
+                                Modal::begin([
+                                    'header' => '<h4 class="modal-title">' . Yii::t('frontend', 'License') . '</b></h4>',
+                                    'toggleButton' => ['label' => Yii::t('frontend', 'Open license'), 'class' => 'btn btn-danger'],
+                                ]);
+
+                                echo $this->render('license');
+
+                                Modal::end();
+                                ?>
+                            </div>
+                            <div class="col-sm-4">
+                                <?= $form->field($model, 'license')->widget(CheckboxX::classname(), [
+                                    'autoLabel' => false,
+                                    'name'=>'s_1',
+                                    'options' => [
+                                        'race' => 's_1',
+                                    ],
+                                    'pluginOptions' => [
+                                        'threeState' => false
+                                    ]
+                                ]) ?>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -47,5 +47,8 @@ return [
     'Age group from request' => 'Для заявок',
     'Age group from race' => 'Для естафет',
     'The requested page does not exist.' => 'Сторінка не знайдена',
-    'Age group race' => 'Вікові категорії для естафет'
+    'Age group race' => 'Вікові категорії для естафет',
+    'Sended confirm message' => 'Повідомлення відправлено',
+    'Send message' => 'Відправити повідомлення',
+    'Resend message' => 'Відправити повідомлення знову'
 ];

@@ -25,6 +25,7 @@ class m170302_073643_request extends Migration
             'email' => $this->string(255)->notNull(),
             'phone_number' => $this->string(255)->notNull()->unique(),
             'race' => $this->boolean()->notNull()->defaultValue(false),
+            'send_email' => $this->boolean()->notNull()->defaultValue(false)
         ], $tableOptions);
 
         $this->createIndex('idx-request-age_group', 'request', 'age_group');

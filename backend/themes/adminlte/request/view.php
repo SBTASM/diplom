@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 }
             ],
+            'send_email:boolean',
             [
                 'label' => Yii::t('backend', 'Distances'),
                 'format' => 'html',
@@ -70,8 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a($name, ['distance/view', 'id' => $distance->id], ['class' => 'btn btn-link']) . "<br>";
                     }]);
                 }
-
-            ]
+            ],
         ],
     ]) ?>
 
@@ -99,6 +99,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'btn btn-default',
                     ]) ?>
                 <?php } ?>
+
+                <?php if($model->send_email === 0){ ?>
+                    <?= Html::a(Yii::t('backend', 'Send message'), ['request/send-confirm-message',
+                        'id' => $model->id, 'to' => $model->email],
+                        ['class' => 'btn btn-success']
+                    ) ?>
+                <?php }else{ ?>
+                    <?= Html::a(Yii::t('backend', 'Resend message'), ['request/send-confirm-message', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                    ]) ?>
+                <?php } ?>
+
             </div>
         </div>
     </div>

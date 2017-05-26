@@ -20,6 +20,7 @@ use yii\db\ActiveRecord;
  * @property string $email
  * @property string $phone_number
  * @property integer race
+ * @property integer send_email
  *
  * @property Distances[] $distances
  * @property AgeGroup $ageGroup
@@ -41,7 +42,7 @@ class Request extends ActiveRecord
     {
         return [
             [['city', 'first_name', 'last_name', 'date_of_birth', 'age_group', 'club_name', 'email', 'phone_number', 'pat_name', 'race'], 'required'],
-            [['sex', 'age_group', 'race'], 'integer'],
+            [['sex', 'age_group', 'race', 'send_email'], 'integer'],
             [['city', 'date_of_birth', 'phone_number', 'first_name', 'last_name', 'club_name', 'email', 'pat_name'], 'string', 'max' => 255],
             [['age_group'], 'exist', 'skipOnError' => true, 'targetClass' => AgeGroup::className(), 'targetAttribute' => ['age_group' => 'id']],
             [['phone_number', 'email'], 'unique'],
@@ -67,6 +68,7 @@ class Request extends ActiveRecord
             'phone_number' => \Yii::t('frontend', 'Phone number'),
             'pat_name' => \Yii::t('frontend', 'Pat name'),
             'race' => \Yii::t('frontend', 'Race'),
+            'send_email' => Yii::t('frontend', 'Confirmation send')
         ];
     }
 

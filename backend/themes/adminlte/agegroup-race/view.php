@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->group;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Age group race'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="age-group-view">
     <div class="row">

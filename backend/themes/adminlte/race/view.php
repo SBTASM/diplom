@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $request = $data->getOwner()->one();
                     return Html::a($request->last_name . ' ' . $request->first_name . ' ' . $request->pat_name, ['request/view', 'id' => $request->id], ['class' => 'btn btn-link']);
                 }
-            ]
+            ],
         ],
     ]) ?>
 
