@@ -26,7 +26,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'error'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -46,11 +46,6 @@ class SiteController extends Controller
      */
     public function actions()
     {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
     }
 
     /**
@@ -94,5 +89,9 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionError(){
+        return $this->render('error', ['name' => 'Помилка']);
     }
 }

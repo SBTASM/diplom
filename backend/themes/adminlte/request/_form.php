@@ -1,6 +1,7 @@
 <?php
 
 use kartik\checkbox\CheckboxX;
+use kartik\widgets\DepDrop;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -12,12 +13,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="request-form">
-    <?php $form = ActiveForm::begin(
-        [
-            'action' => Url::to(['request/create']),
-            'options' => ['data-pjax' => '1']
-        ])
-    ?>
+    <?php $form = ActiveForm::begin([]) ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="row">
@@ -48,8 +44,68 @@ use yii\widgets\ActiveForm;
                     <div class="col-sm-3"> <?= $form->field($model, 'age_group')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\AgeGroup::find()->all(), 'id', 'group'), []) ?></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><div class="text-center"><?= Yii::t('frontend', 'Distances of day 1') ?></div></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <?php foreach ($distances as $key => $distance): ?>
+                                <?php if($distance->day == false){ ?>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
+                                            <?= $form->field($distance, "[$key]distance_id")->widget(DepDrop::classname(), [
+                                                'type'=>DepDrop::TYPE_SELECT2,
+                                                'data'=> \yii\helpers\ArrayHelper::map(\common\models\Distance::find()->where(['day' => 0])->all(), 'id', 'distance'),
+                                                'select2Options' => ['pluginOptions' => ['allowClear'=>true]],
+                                                'pluginOptions'=>[
+                                                    'url' => ['#'],
+                                                    'depends' => ["distance_id"],
+                                                    'params'=>['input-type-1', 'input-type-2']
+                                                ]]) ?>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <?= $form->field($distance, "[$key]pre_time")->widget(\yii\widgets\MaskedInput::className(), ['mask' => '99:99:99'])
+                                            ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><div class="text-center"><?= Yii::t('frontend', 'Distances of day 2') ?></div></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <?php foreach ($distances as $key => $distance): ?>
+                                <?php if($distance->day == true){ ?>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
+                                            <?= $form->field($distance, "[$key]distance_id")->widget(DepDrop::classname(), [
+                                                'type'=>DepDrop::TYPE_SELECT2,
+                                                'data'=> \yii\helpers\ArrayHelper::map(\common\models\Distance::find()->where(['day' => 1])->all(), 'id', 'distance'),
+                                                'select2Options' => ['pluginOptions' => ['allowClear'=>true]],
+                                                'pluginOptions'=>[
+                                                    'url' => ['#'],
+                                                    'depends' => ["distance_id"],
+                                                    'params'=>['input-type-1', 'input-type-2']
+                                                ]]) ?>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <?= $form->field($distance, "[$key]pre_time")->widget(\yii\widgets\MaskedInput::className(), ['mask' => '99:99:99']) ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

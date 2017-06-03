@@ -105,4 +105,12 @@ class Request extends ActiveRecord
     {
         return new RequestQuery(get_called_class());
     }
+
+    /**
+     * @inheritdoc
+     * @return string
+     */
+    public function getFullName(){
+        return $this->last_name . ' ' . $this->first_name . ' ' . $this->pat_name;
+    }
 }

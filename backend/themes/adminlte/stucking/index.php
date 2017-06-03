@@ -1,9 +1,12 @@
 <?php
 /* @var $this yii\web\View */
 ?>
-<h1>stucking/index</h1>
+<div class="stucking-index">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="text-center">
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+            </div>
+        </div>
+    </div>
+</div>

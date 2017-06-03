@@ -1,6 +1,6 @@
 <?php
 return [
-    'adminEmail' => 'info@roma.sbtasm.com',
-    'supportEmail' => 'support@roma.sbtasm.com',
+    'adminEmail' => 'swim@skazhenikarasi.com.ua',
+    'supportEmail' => 'swim@skazhenikarasi.com.ua',
     'user.passwordResetTokenExpire' => 3600,
 ];

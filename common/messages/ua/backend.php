@@ -50,5 +50,11 @@ return [
     'Age group race' => 'Вікові категорії для естафет',
     'Sended confirm message' => 'Повідомлення відправлено',
     'Send message' => 'Відправити повідомлення',
-    'Resend message' => 'Відправити повідомлення знову'
+    'Resend message' => 'Відправити повідомлення знову',
+    'Confirmation message sended to {email}.' => 'Повідомлення відправлено на адресу: {email}.',
+    'User password' => 'Пароль',
+    'User password repeat' => 'Підтвердження паролю',
+    'Email' => 'Е-мейл',
+    'User settings' => 'Налаштування користувача',
+    'Settings saved complete.' => 'Налаштування збережено успішно.'
 ];

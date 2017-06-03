@@ -21,9 +21,18 @@ return [
             // 'i18n' => []
         ]
     ],
+
+    //'catchAll' => ['site/index'],
+
     'components' => [
+
+        'assetManager' => [
+            'basePath' => '@webroot/assets',
+            'baseUrl' => '@web/assets'
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/admin'
         ],
         'view' => [
             'theme' => [
@@ -50,13 +59,20 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                '<controller:(request|distance)>/<id:\d+>/<action:(create|update|delete)>' => '<controller>/<action>',
+                '<controller:(request|distance)>/<id:\d+>' => '<controller>/view',
+                '<controller:(request|distance)>' => '<controller>/index',
+            ],
+            'suffix' => '.html'
         ],
         'keyStorage' => [
             'class' => \common\components\keyStorage\KeyStorage::class,

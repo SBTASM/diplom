@@ -134,7 +134,7 @@ class SiteController extends Controller
         return $this->render('race', ['model' => $model]);
     }
     public function actionTestMail(){
-        $this->sendConfirmMessage('Богдан', 'sirenko_bogdan@ukr.net');
+        $this->sendConfirmMessage('UserName', 'sirenko_bogdan@ukr.net');
     }
     /**
      * @param RequestForm $request_form
@@ -160,48 +160,64 @@ class SiteController extends Controller
             $race->save();
         }
     }
-    public function actionViewRequest(){
-
+    public function actionViewRequest($key){
         $id = 1;
         $request = Request::find()->where(['id' => $id])->one();
+        $distances = $request->getDistances()->all();
+        $race = $request->getRace()->one();
 
-        return $this->render('view-request', ['request' => $request]);
+        return $this->render('view-request', [
+            'model' => $request,
+            'distances' => $distances,
+            'race' => $race
+        ]);
     }
-    private function sendConfirmMessage($username, $to, $request_id = null){
+    private function sendConfirmMessage($username, $to, $id = null){
 
         $dates = [
-            '14 травня 2016р. (субота).' => [
+            '3 червня 2017 р.' => [
                 '11:00 - 13:30 - реестрація учасників',
                 '14:00 - 14:45 - розминка',
                 '15:00 - старт',
             ],
-            '15 травня 2016р. (неділя)' => [
+            '4 червня 2017 р.' => [
                 '09:00 - 09:45 - розминка',
                 '10:00 - старт'
             ]
         ];
         $numbers = [
             'Максим' => '+380976436156',
-            'Ігор' => '+380975382086'
+            'Ігор' => '+380975382086',
+            'Михайло' => '+380959497894',
         ];
 
         $mail = \Yii::$app->mailer->compose('confirm', [
             'dates' => $dates,
             'numbers' => $numbers,
-            'address' => 'м. Полтава, вулиця Фрунзе 2, офіс 419',
+            'address' => 'м. Полтава, вул. Європейська 2, офіс 419',
             'email' => \Yii::$app->params['supportEmail'],
-            'username' => $username
+            'username' => $username,
+            'key' => $this->cryptEmail($to)
         ]);
 
-        $mail->setSubject('Підтвердження реестрації на ВППО "МАСТЕРС" 14 та 15 травня 2016 року');
+        $mail->setSubject('Підтвердження реестрації на ВППО "МАСТЕРС" 3 та 4 червня 2017 року');
         $mail->setTo($to);
         $mail->setFrom(\Yii::$app->params['adminEmail']);
 
         $mail->send();
     }
 
-    public function actionTest(){
+    private function cryptEmail($email){
+        $cm = \Yii::$app->security->encryptByKey('123', \Yii::$app->request->cookieValidationKey);
+        $cm = bin2hex($cm);
 
-        return $this->render('test');
+        return $cm;
+    }
+
+    private function decryptEmail($string){
+        $bin = hex2bin($string);
+        $email = \Yii::$app->security->decryptByKey($bin, \Yii::$app->request->cookieValidationKey);
+
+        return $email;
     }
 }

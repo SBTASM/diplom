@@ -20,7 +20,6 @@ use yii\helpers\Html;
     Yii::t('mail', 'If you are taking part in the swimming relay, the representative of your team must present "a card\'s relay swimming."'),
     Yii::t('mail', 'Checks claimed your distance.'),
 ]) ?>
-<?= Html::tag('strong', Html::tag('p',  Yii::t('mail', 'Blank "voluntary acknowledgment of risk" and "a card\'s relay swimming" in Annex hereto.'))) ?>
 
 <?php foreach ($dates as $header => $date){
     echo Html::tag('strong', $header);
@@ -32,7 +31,6 @@ use yii\helpers\Html;
 <?= Html::ul($numbers, ['item' => function($item, $index){
     return Html::tag('li', $index . ' ' . Html::tag('strong', $item));
 }]) ?>
-
 <center>
     <?= Html::tag('strong',  Yii::t('mail', 'Address: {address}.', ['address' => $address])) ?><br/>
     <?= Html::tag('strong',  Yii::t('mail', 'Email: {email}.', ['email' => $email])) ?><br/>

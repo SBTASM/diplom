@@ -77,7 +77,7 @@ class RequestController extends Controller
      */
     public function actionCreate()
     {
-        $model = new RequestForm(['race' => 0, 'scenario' => RequestForm::SCENARIO_EDIT]);
+        $model = new Request(['race' => 0]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -99,9 +99,15 @@ class RequestController extends Controller
         $model = $this->findModel($id);
         $distances = $model->getDistances()->all();
 
+        $email = $model->email;
+
         if ($model->load(Yii::$app->request->post()) && Model::loadMultiple($distances, \Yii::$app->request->post()) && $model->save()) {
             foreach ($distances as $distance){
                 $distance->save(false);
+            }
+            if($email !== $model->email){
+                $model->send_email = 0;
+                $model->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -176,30 +182,31 @@ class RequestController extends Controller
         $request = Request::find()->where(['id' => $id])->one();
 
         $dates = [
-            '14 травня 2016р. (субота).' => [
+            '3 червня 2017 р.' => [
                 '11:00 - 13:30 - реестрація учасників',
                 '14:00 - 14:45 - розминка',
                 '15:00 - старт',
             ],
-            '15 травня 2016р. (неділя)' => [
+            '4 червня 2017 р.' => [
                 '09:00 - 09:45 - розминка',
                 '10:00 - старт'
             ]
         ];
         $numbers = [
             'Максим' => '+380976436156',
-            'Ігор' => '+380975382086'
+            'Ігор' => '+380975382086',
+            'Михайло' => '+380959497894',
         ];
 
         $mail = \Yii::$app->mailer->compose('confirm', [
             'dates' => $dates,
             'numbers' => $numbers,
-            'address' => 'м. Полтава, вулиця Фрунзе 2, офіс 419',
+            'address' => 'м. Полтава, вул. Європейська 2, офіс 419',
             'email' => \Yii::$app->params['supportEmail'],
-            'username' => $request->first_name
+            'username' => $request->first_name,
         ]);
 
-        $mail->setSubject('Підтвердження реестрації на ВППО "МАСТЕРС" 14 та 15 травня 2016 року');
+        $mail->setSubject('Підтвердження реестрації на ВППО "МАСТЕРС" 3 та 4 червня 2017 року');
         $mail->setTo($request->email);
         $mail->setFrom(\Yii::$app->params['adminEmail']);
 
@@ -207,6 +214,8 @@ class RequestController extends Controller
 
         if($request->send_email === 0) $request->send_email = true;
         $request->save();
+
+        Yii::$app->session->setFlash('success', \Yii::t('backend', 'Confirmation message sended to {email}.', ['email' => $request->email]));
 
         return $this->redirect(['request/view', 'id' => $id]);
     }
